@@ -11,7 +11,11 @@ import SwiftUI
 struct BudgetAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            
+            let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
+            ContentView(vm: BudgetListViewModel(context: viewContext))
+                .environment(\.managedObjectContext, viewContext)
+            
         }
     }
 }
